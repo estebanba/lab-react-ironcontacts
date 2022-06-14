@@ -2,7 +2,8 @@ import React, { useState } from "react";
 import "./App.css";
 import contactsJSON from "./contacts.json";
 
-const fiveContacts = contactsJSON.slice(0, 10);
+const fiveContacts = contactsJSON.slice(0, 5);
+const restContacts = contactsJSON.slice(5);
 
 // "name": "Idris Elba",
 // "pictureUrl": "https://image.tmdb.org/t/p/w500/d9NkfCwczP0TjgrjpF94jF67SK8.jpg",
@@ -16,6 +17,45 @@ function App() {
 
   return (
     <div className="App">
+      <button
+        type="button"
+        onClick={() => {
+          const randomContact =
+            restContacts[Math.round(Math.random() * restContacts.length)];
+          const newContacts = JSON.parse(JSON.stringify(contacts));
+          newContacts.push(randomContact);
+          setContacts(newContacts);
+        }}
+      >
+        Add Random Contact
+      </button>
+
+      <button
+        type="button"
+        onClick={() => {
+          const newContacts = JSON.parse(JSON.stringify(contacts));
+          newContacts.sort((first, second) =>
+            first.name.localeCompare(second.name)
+          );
+          setContacts(newContacts);
+        }}
+      >
+        Sort By Name
+      </button>
+
+      <button
+        type="button"
+        onClick={() => {
+          const newContacts = JSON.parse(JSON.stringify(contacts));
+          newContacts.sort(
+            (first, second) => second.popularity - first.popularity
+          );
+          setContacts(newContacts);
+        }}
+      >
+        Sort By Popularity
+      </button>
+
       <table>
         <thead>
           <tr>
@@ -36,9 +76,9 @@ function App() {
                 <img src={oneContact.pictureUrl} alt="some cool people" />
               </td>
               <td>{oneContact.name}</td>
-              <td>{oneContact.popularity}</td>
-              {oneContact.wonOscar === true ? <td>🏆</td> : <td></td>}
-              {oneContact.wonEmmy === true ? <td>🏆</td> : <td></td>}
+              <td>{oneContact.popularity.toPrecision(4)}</td>
+              {oneContact.wonOscar ? <td>🏆</td> : <td></td>}
+              {oneContact.wonEmmy ? <td>🏆</td> : <td></td>}
             </tr>
           ))}
         </tbody>
