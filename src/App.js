@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import "./App.css";
 import contactsJSON from "./contacts.json";
 
-const fiveContacts = contactsJSON.slice(0, 5);
+const fiveContacts = contactsJSON.slice(0, 10);
 
 // "name": "Idris Elba",
 // "pictureUrl": "https://image.tmdb.org/t/p/w500/d9NkfCwczP0TjgrjpF94jF67SK8.jpg",
@@ -27,6 +27,8 @@ function App() {
             <td>Picture</td>
             <td>Name</td>
             <td>Popularity</td>
+            <td>Won Oscar</td>
+            <td>Won Emmy</td>
           </tr>
           {contacts.map((oneContact) => (
             <tr>
@@ -35,6 +37,8 @@ function App() {
               </td>
               <td>{oneContact.name}</td>
               <td>{oneContact.popularity}</td>
+              {oneContact.wonOscar === true ? <td>🏆</td> : <td></td>}
+              {oneContact.wonEmmy === true ? <td>🏆</td> : <td></td>}
             </tr>
           ))}
         </tbody>
