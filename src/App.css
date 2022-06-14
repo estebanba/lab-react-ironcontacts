@@ -1,3 +1,23 @@
+.App {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    text-align: center;
+}
+
+table {
+    width: 600px;
+    border-top: 1px solid black;
+    border-left: 1px solid black;
+}
+
+td {
+    border-bottom: 1px solid black;
+    border-right: 1px solid black;
+}
+
 td img {
     width: 50px;
 }
+
