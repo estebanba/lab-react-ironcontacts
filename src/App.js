@@ -1,23 +1,44 @@
-import logo from './logo.svg';
-import './App.css';
+import React, { useState } from "react";
+import "./App.css";
+import contactsJSON from "./contacts.json";
+
+const fiveContacts = contactsJSON.slice(0, 5);
+
+// "name": "Idris Elba",
+// "pictureUrl": "https://image.tmdb.org/t/p/w500/d9NkfCwczP0TjgrjpF94jF67SK8.jpg",
+// "popularity": 11.622713,
+// "id": "11731993-0604-4bee-80d5-67ad845d0a38",
+// "wonOscar": false,
+// "wonEmmy": false
 
 function App() {
+  const [contacts, setContacts] = useState(fiveContacts);
+
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+      <table>
+        <thead>
+          <tr>
+            <th>IronContacts</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>Picture</td>
+            <td>Name</td>
+            <td>Popularity</td>
+          </tr>
+          {contacts.map((oneContact) => (
+            <tr>
+              <td>
+                <img src={oneContact.pictureUrl} alt="some cool people" />
+              </td>
+              <td>{oneContact.name}</td>
+              <td>{oneContact.popularity}</td>
+            </tr>
+          ))}
+        </tbody>
+      </table>
     </div>
   );
 }
